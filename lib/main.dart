@@ -100,7 +100,6 @@ class _HomeState extends State<Home> {
       builder: (context, snapshot) {
         double dw = MediaQuery.of(context).size.width;
         double dh = MediaQuery.of(context).size.height;
-        double top = MediaQuery.of(context).padding.top;
 
         // Default empty container if no data/loading/error for now based on original code style
         if (snapshot.connectionState != ConnectionState.done ||
@@ -169,7 +168,7 @@ class _HomeState extends State<Home> {
               Container(
                 width: dw,
                 height: dh,
-                padding: EdgeInsets.fromLTRB(0, top, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: ScrollConfiguration(
                   behavior: NoGlowListView(),
                   child: SingleChildScrollView(
@@ -178,6 +177,7 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Header Row
+                        SizedBox(height: 40), // Top spacing
                         Container(
                           width: dw,
                           padding: const EdgeInsets.fromLTRB(
@@ -232,7 +232,7 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-
+                  
                         // Main Temp Display
                         Container(
                           width: dw,
@@ -283,7 +283,7 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-
+                  
                         // Stats Row
                         Container(
                           width: dw,
@@ -318,14 +318,14 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-
+                  
                         Container(
                           margin: const EdgeInsets.all(15),
                           width: dw,
                           height: 3,
                           color: isDay ? const Color(0x33302745) : Colors.white,
                         ),
-
+                  
                         // Hourly Forecast
                         Container(
                           width: dw,
@@ -383,16 +383,16 @@ class _HomeState extends State<Home> {
                                       int currentHour = int.parse(
                                         DateFormat('H').format(DateTime.now()),
                                       );
-
+                  
                                       if (currentHour > j)
                                         return Container(); // Skip past hours ?? Original logic seems to just filter them out.
                                       // Actually original logic was: for loop 0..23, if currentHour <= j
-
+                  
                                       // Correct logic: we ONLY want future hours.
                                       // Let's rely on the if check
                                       if (j < currentHour)
                                         return const SizedBox.shrink();
-
+                  
                                       return SizedBox(
                                         width: 100,
                                         child: Column(
@@ -452,14 +452,14 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                         ),
-
+                  
                         Container(
                           margin: const EdgeInsets.all(15),
                           width: dw,
                           height: 3,
                           color: isDay ? const Color(0x33302745) : Colors.white,
                         ),
-
+                  
                         // 3-Day Forecast
                         Container(
                           width: dw,
